@@ -107,7 +107,7 @@ var App = function() {
      *  Add static css and js resources
      */
      self.addStatic = function() {
-        self.app.use(express.static('assets'));
+        self.app.use(express.static(path.join(__dirname, 'assets')));
      }
 
     /**
