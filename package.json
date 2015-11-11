@@ -25,7 +25,8 @@
   },
 
   "dependencies": {
-    "express": "*"
+    "express": "*",
+    "serve-favicon": "*"
   },
   "devDependencies": {},
   "bundleDependencies": [],
