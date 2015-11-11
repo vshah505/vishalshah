@@ -1,0 +1,35 @@
+{
+  "name": "VishalShah",
+  "version": "1.0.1",
+  "description": "Personal Website",
+  "keywords": [
+    "OpenShift",
+    "Node.js",
+    "application",
+    "openshift"
+  ],
+  "author": {
+    "name": "vshah505",
+    "email": "vishal.shah505@gmail.com",
+    "url":  "http://www.openshift.com/"
+  },
+  "homepage": "http://www.openshift.com/",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/vshah505/vishalshah.git"
+  },
+
+  "engines": {
+    "node": "4.2.2",
+    "npm": "3.3.4"
+  },
+
+  "dependencies": {
+    "express": "*"
+  },
+  "devDependencies": {},
+  "bundleDependencies": [],
+
+  "private": true,
+  "main": "server.js"
+}
