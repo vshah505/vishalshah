@@ -1,13 +1,9 @@
 #!/bin/env node
-//  OpenShift sample Node application
+
 var express = require('express');
-var fs      = require('fs');
+var fs = require('fs');
 
-
-/**
- *  Define the sample application.
- */
-var SampleApp = function() {
+var App = function() {
 
     //  Scope.
     var self = this;
@@ -26,35 +22,7 @@ var SampleApp = function() {
                          process.env.OPENSHIFT_INTERNAL_IP;
         self.port      = process.env.OPENSHIFT_NODEJS_PORT   ||
                          process.env.OPENSHIFT_INTERNAL_PORT || 8080;
-
-        if (typeof self.ipaddress === "undefined") {
-            //  Log errors on OpenShift but continue w/ 127.0.0.1 - this
-            //  allows us to run/test the app locally.
-            console.warn('No OPENSHIFT_*_IP var, using 127.0.0.1');
-            self.ipaddress = "127.0.0.1";
-        };
     };
-
-
-    /**
-     *  Populate the cache.
-     */
-    self.populateCache = function() {
-        if (typeof self.zcache === "undefined") {
-            self.zcache = { 'index.html': '' };
-        }
-
-        //  Local cache for static content.
-        self.zcache['index.html'] = fs.readFileSync('./index.html');
-    };
-
-
-    /**
-     *  Retrieve entry (content) from cache.
-     *  @param {string} key  Key identifying content to retrieve from cache.
-     */
-    self.cache_get = function(key) { return self.zcache[key]; };
-
 
     /**
      *  terminator === the termination handler
@@ -95,37 +63,14 @@ var SampleApp = function() {
      *  Create the routing table entries + handlers for the application.
      */
     self.createRoutes = function() {
+
         self.routes = { };
-
-        // Routes for /health, /asciimo, /env and /
-        self.routes['/health'] = function(req, res) {
-            res.send('1');
-        };
-
-        self.routes['/asciimo'] = function(req, res) {
-            var link = "http://i.imgur.com/kmbjB.png";
-            res.send("<html><body><img src='" + link + "'></body></html>");
-        };
-
-        self.routes['/env'] = function(req, res) {
-            var content = 'Version: ' + process.version + '\n<br/>\n' +
-                          'Env: {<br/>\n<pre>';
-            //  Add env entries.
-            for (var k in process.env) {
-               content += '   ' + k + ': ' + process.env[k] + '\n';
-            }
-            content += '}\n</pre><br/>\n'
-            res.send('<html>\n' +
-                     '  <head><title>Node.js Process Env</title></head>\n' +
-                     '  <body>\n<br/>\n' + content + '</body>\n</html>');
-        };
 
         self.routes['/'] = function(req, res) {
             res.set('Content-Type', 'text/html');
             res.send(self.cache_get('index.html') );
         };
     };
-
 
     /**
      *  Initialize the server (express) and create the routes and register
@@ -143,7 +88,7 @@ var SampleApp = function() {
 
 
     /**
-     *  Initializes the sample application.
+     *  Initializes the application.
      */
     self.initialize = function() {
         self.setupVariables();
@@ -156,7 +101,7 @@ var SampleApp = function() {
 
 
     /**
-     *  Start the server (starts up the sample application).
+     *  Start the server (starts up the application).
      */
     self.start = function() {
         //  Start the app on the specific interface (and port).
@@ -166,14 +111,12 @@ var SampleApp = function() {
         });
     };
 
-};   /*  Sample Application.  */
-
-
+};   /* Application.  */
 
 /**
  *  main():  Main code.
  */
-var zapp = new SampleApp();
-zapp.initialize();
-zapp.start();
+var app = new App();
+app.initialize();
+app.start();
 
