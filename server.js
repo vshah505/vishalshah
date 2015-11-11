@@ -2,6 +2,7 @@
 
 var express = require('express');
 var fs = require('fs');
+var favicon = require('serve-favicon')
 
 var App = function() {
 
@@ -110,6 +111,13 @@ var App = function() {
         self.app.use('/assets', express.static(__dirname + '/assets'));
      }
 
+     /**
+     *  Add favicon
+     */
+     self.addFavicon = function() {
+        self.app.use(favicon(__dirname + '/assets/ico/favicon.ico'));
+     }
+
     /**
      *  Initialize the server (express) and create the routes and register
      *  the handlers.
@@ -118,13 +126,13 @@ var App = function() {
         self.createRoutes();
         self.app = express();
         self.addStatic();
+        self.addFavicon();
 
         //  Add handlers for the app (from the routes).
         for (var r in self.routes) {
             self.app.get(r, self.routes[r]);
         }
     };
-
 
     /**
      *  Initializes the application.
