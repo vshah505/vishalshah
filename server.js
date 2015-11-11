@@ -22,7 +22,35 @@ var App = function() {
                          process.env.OPENSHIFT_INTERNAL_IP;
         self.port      = process.env.OPENSHIFT_NODEJS_PORT   ||
                          process.env.OPENSHIFT_INTERNAL_PORT || 8080;
+
+        if (typeof self.ipaddress === "undefined") {
+            //  Log errors on OpenShift but continue w/ 127.0.0.1 - this
+            //  allows us to run/test the app locally.
+            console.warn('No OPENSHIFT_*_IP var, using 127.0.0.1');
+            self.ipaddress = "127.0.0.1";
+        };
     };
+
+
+    /**
+     *  Populate the cache.
+     */
+    self.populateCache = function() {
+        if (typeof self.zcache === "undefined") {
+            self.zcache = { 'index.html': '' };
+        }
+
+        //  Local cache for static content.
+        self.zcache['index.html'] = fs.readFileSync('./index.html');
+    };
+
+
+    /**
+     *  Retrieve entry (content) from cache.
+     *  @param {string} key  Key identifying content to retrieve from cache.
+     */
+    self.cache_get = function(key) { return self.zcache[key]; };
+
 
     /**
      *  terminator === the termination handler
@@ -63,14 +91,18 @@ var App = function() {
      *  Create the routing table entries + handlers for the application.
      */
     self.createRoutes = function() {
-
         self.routes = { };
+
+        self.routes['/health'] = function(req, res) {
+            res.send('1');
+        };
 
         self.routes['/'] = function(req, res) {
             res.set('Content-Type', 'text/html');
             res.send(self.cache_get('index.html') );
         };
     };
+
 
     /**
      *  Initialize the server (express) and create the routes and register
