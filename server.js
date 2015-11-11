@@ -103,6 +103,12 @@ var App = function() {
         };
     };
 
+    /**
+     *  Add static css and js resources
+     */
+     self.addStatic = function() {
+        self.app.use(express.static('assets');
+     }
 
     /**
      *  Initialize the server (express) and create the routes and register
@@ -111,6 +117,7 @@ var App = function() {
     self.initializeServer = function() {
         self.createRoutes();
         self.app = express();
+        self.addStatic();
 
         //  Add handlers for the app (from the routes).
         for (var r in self.routes) {
