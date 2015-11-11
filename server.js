@@ -2,7 +2,6 @@
 
 var express = require('express');
 var fs = require('fs');
-var path = require('path');
 
 var App = function() {
 
@@ -108,7 +107,7 @@ var App = function() {
      *  Add static css and js resources
      */
      self.addStatic = function() {
-        self.app.use(express.static(path.join(__dirname, 'assets')));
+        self.app.use(express.static(__dirname + '/assets'));
      }
 
     /**
