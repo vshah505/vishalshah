@@ -83,8 +83,8 @@ h2 {
 }
 
 .dim {
-  opacity:0.70;
-  filter:alpha(opacity=70);
+  opacity:0.50;
+  filter:alpha(opacity=50);
 }
 
 .headline {
