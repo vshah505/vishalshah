@@ -1,0 +1,111 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="Vishal Shah, Software Engineer in NJ, USA">
+  <meta name="author" content="Vishal Shah">
+
+  <title>Vishal Shah // Software Engineer</title>
+
+  <!-- Favicon -->
+  <link rel="shortcut icon" type="image/x-icon" href="assets/ico/favicon.ico" />
+
+  <!-- Bootstrap CSS -->
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap.min.css" integrity="sha512-dTfge/zgoMYpP7QbHy4gWMEGsbsdZeCXz7irItjcC3sPUFtf0kuFbDz/ixG7ArTxmDjLXDmezHubeNikyKGVyQ==" crossorigin="anonymous">
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.4.0/css/font-awesome.min.css">
+  <link href="assets/css/animate.css" rel="stylesheet">
+
+  <!-- Custom CSS -->
+  <link href="assets/css/main.css" rel="stylesheet">
+  <link href='https://fonts.googleapis.com/css?family=Oswald:400,300,700' rel='stylesheet' type='text/css'>
+  <link href='https://fonts.googleapis.com/css?family=EB+Garamond' rel='stylesheet' type='text/css'>
+</head>
+
+<body>
+  <nav class="navbar navbar-inverse navbar-fixed-top dim" style="opacity:0.60;">
+    <div class="container">
+      <div class="navbar-header">
+            <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1">
+                <span class="sr-only">Toggle navigation</span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+            </button>
+            <a class="navbar-brand" href="/">Vishal Shah</a>
+        </div>
+        <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+            <ul class="nav navbar-nav">
+                <li>
+                    <a class="ref" value="rse">Resume Search Engine</a>
+                </li>
+                <li>
+                    <a class="ref" value="parking">Parking Garage Content Management System</a>
+                </li>
+            </ul>
+        </div>
+    </div>
+  </nav>
+  <div class="container">
+    <div style="margin-top: 75px;"></div>
+    <div id="project_contents">
+      <hr class="divider">
+         <div class="project">
+          <h2 class="heading"><i class="fa fa-book"></i><span class="text-muted"> Projects</span></h2>
+         </div>
+      <hr class="divider" id="rse">
+        <!-- Resume Search Engine -->
+        <div class="project">
+            <!--<img class="image img-circle img-responsive pull-right" src="http://placehold.it/500x500">-->
+            <h2 class="heading">Resume Search Engine
+                <span class="text-muted"></span>
+            </h2>
+            <p class="lead">The resume search engine is a platform that allows for ingestion and searchability of resumes by content, name, and location. It is currently being utilized by a recuriting firm in NYC.</p>
+
+            <p class="lead">The technology behind the system is <a class="project_link" href="https://httpd.apache.org/">Apache HTTP</a>, <a class="project_link" href="https://en.wikipedia.org/wiki/PHP">PHP</a>, <a class="project_link" href="https://www.mysql.com/">MySQL</a>, and <a class="project_link" href="http://lucene.apache.org/solr/quickstart.html">Apache Solr</a>.</p>
+
+            <p class="lead">Apache HTTP and PHP allow for a hosted front-end service that allows for searchability, the ability to upload new resumes into the system, administrative management of users and permissions, adding metadata to resumes, and downloading resumes. MySQL is used to store metadata for the documents and the full text of the content of the resume. Initially <a class="project_link" href="https://dev.mysql.com/doc/refman/5.7/en/innodb-fulltext-index.html">InnoDB FULLTEXT Index</a> was implemented due to the initial set of documents being the range of 50,000; however, the searchability features were lacking on resume content. Searchability is achieved through indexing with Apache Solr to allow for rich full-text search features on resume content.</p>
+
+            <p class="lead">Resumes are added on a regular basis and due to searches being conducted through Apache Solr, which requires the index to be created from the contents of the MySQL database, a scheduled reindexing is done to manage deltas every hour.</p>
+        </div>
+      <hr class="divider" id="parking">
+        <!-- Parking Garage Content Management System -->
+        <div class="project">
+            <img class="image img-responsive pull-right" width="550" height="550" src="assets/img/garage_diagram.png">
+            <h2 class="heading">Parking Garage Content Management System
+            </h2>
+            <p class="lead">The Parking Garage System is a system that allows the management and visualization of parking data in parking garages. It is currently utilized by a chain of parking garages in NYC.
+
+            <p class="lead">The technology behind the system is Java, <a class="project_link" href="http://www.oracle.com/technetwork/java/index-jsp-135475.html">Servlets</a>, <a class="project_link" href="http://www.oracle.com/technetwork/java/javaee/jsp/index.html">Java Servlet Pages (JSP)</a>, and <a class="project_link" href="https://www.mysql.com/">MySQL</a>.</p>
+
+            <p class="lead">The inherenet system in the garages that runs the application for interactions with customers and payment management is written in .NET. The content management system is managed utilizing Java. Data is synced from the databases in the garages to the central database as a scheduled task. The data for car check-ins, check-outs, and other associated metadata is logically synced based on calculated deltas to reduce network overhead. Also, the rates in the garages is managed through the central database and the changes are propogated to the garages via the syncing process.</p>
+
+            <p class="lead">The data is visualized through an Apache Tomcat web service utilizing Java Servlets and JSP. Garage rate management is also provided through this service.</p>
+        </div>
+      <hr class="divider">
+    </div>
+  </div>
+
+  <!-- JQuery and Bootstrap JS
+  ================================================== -->
+  <script src="https://code.jquery.com/jquery-1.10.2.min.js"></script>
+  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/js/bootstrap.min.js" integrity="sha512-K1qjQ+NcF2TYO/eI3M6v8EiNYZfA95pQumfvcVrTHtwQVDG+aHRqLi/ETn2uB+1JqwYqVG3LIvdm9lj6imS/pQ==" crossorigin="anonymous"></script>
+
+  <!-- Background with Backstrech JS -->
+  <script type="text/javascript" src="assets/js/jquery.backstretch.min.js"></script>
+  <script>
+    $.backstretch("assets/img/background.jpg", {speed: 1000});
+    $('.backstretch').addClass("dim");
+  </script>
+
+  <script>
+    $(".ref").click(function() {
+        $('html, body').animate({
+            scrollTop: $('#' + $(this).attr("value")).offset().top
+        }, 600);
+    });
+  </script>
+
+</body>
+</html>

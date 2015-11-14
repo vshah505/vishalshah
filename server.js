@@ -38,11 +38,12 @@ var App = function() {
      */
     self.populateCache = function() {
         if (typeof self.zcache === "undefined") {
-            self.zcache = { 'index.html': '' };
+            self.zcache = { 'index.html': '', 'projects.html': ''};
         }
 
         //  Local cache for static content.
         self.zcache['index.html'] = fs.readFileSync('./index.html');
+        self.zcache['projects.html'] = fs.readFileSync('./projects.html');
     };
 
 
@@ -101,6 +102,11 @@ var App = function() {
         self.routes['/'] = function(req, res) {
             res.set('Content-Type', 'text/html');
             res.send(self.cache_get('index.html') );
+        };
+
+        self.routes['/projects'] = function(req, res) {
+            res.set('Content-Type', 'text/html');
+            res.send(self.cache_get('projects.html') );
         };
     };
 
